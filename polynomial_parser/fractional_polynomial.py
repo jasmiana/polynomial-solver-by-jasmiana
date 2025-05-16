@@ -204,24 +204,4 @@ class FractionalPolynomial:
             raise TypeError(f"无法将类型 {type(value)} 转换为 Polynomial")
 
 
-        # 注意：Polynomial 的 __truediv__ 和 __rtruediv__ 不应该直接返回 FractionalPolynomial
-        # 而是应该依赖 FractionalPolynomial 的 __add__, __sub__ 等方法来处理混合运算
-        # 例如 PolynomialA + PolynomialB 在 Polynomial 类中处理，PolynomialA + FractionalB 在 FractionalPolynomial 的 __add__ 中处理
-        # 所以 Polynomial 类不再需要直接返回 FractionalPolynomial 的 __truediv__ 和 __rtruediv__ 了。
-
-        # 实际的多项式除法函数仍然是 Polynomial.divmod_polynomial
-
-    # Polynomial 类中的 __truediv__ 和 __rtruediv__ 需要移除，因为它们会导致循环导入
-    # FractionalPolynomial 的运算方法会处理与 Polynomial 的混合运算
-    # 例如，PolynomialA / PolynomialB 会在 Polynomial.__truediv__ 中返回 NotImplemented
-    # 然后 Python 会尝试调用 FractionalPolynomial.__rtruediv__ (如果 PolynomialB 是 FractionalPolynomial)
-    # 或者，我们直接在 Polynomial.__truediv__ 中就创建并返回 FractionalPolynomial
-
-    # 让我们修改 Polynomial.__truediv__ 和 __rtruediv__，使它们直接创建 FractionalPolynomial 对象
-    # 这意味着 polynomial.py 需要导入 fractional_polynomial.py，再次造成循环导入。
-
-    # 替代方案：将 FractionalPolynomial 的创建逻辑放在一个更顶层的文件，或者将 __truediv__ 的实现放在 FractionalPolynomial 中作为类方法或独立的函数
-    # 考虑到 __truediv__ 是 Polynomial 的方法，最 Pythonic 的方式是在 Polynomial 中实现，但需要解决循环导入。
-    # 解决循环导入的一种常见方式是局部导入或将相互依赖的代码放入同一个文件。
-    # 另一种方式是，在 Polynomial.__truediv__ 中只返回 NotImplemented，依赖 FractionalPolynomial 的 __rtruediv__ 来处理。
-    # 让我们选择后者，这更干净。Polynomial 只处理 Polynomial 之间的运算，FractionalPolynomial 处理分式之间的运算以及与 Polynomial 的混合运算。
+        
