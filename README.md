@@ -44,19 +44,19 @@
 项目代码组织在 `polynomial_parser` 目录下，主要包含以下模块：
 
 
-polynomial_parser/                                        <br>
-├── init.py # 包初始化文件                                <br>
-├── ast_nodes.py # 定义 AST 节点类                        <br>
-├── evaluator.py # 实现 AST 求值逻辑                      <br>
-├── fractional_polynomial.py # 实现分式多项式类及其运算    <br>
-├── formatting.py # 实现输出格式化相关的函数               <br>
-├── parser.py # 实现表达式解析器                           <br>
-├── partial_fraction.py # 实现分式裂项功能和排序逻辑       <br>
-├── polynomial.py # 实现多项式类及其运算                   <br>
-└── tokenizer.py # 实现词法分析器                          <br>
-main.py # 项目主入口，提供交互式命令行界面                 <br>
-test.py # 测试文件，可查看具体输入输出格式                 <br>
-README.md # 项目说明文件                                  <br>  
+- `polynomial_parser/`
+    - `__init__.py` # 包初始化文件
+    - `ast_nodes.py` # 定义 AST 节点类
+    - `evaluator.py` # 实现 AST 求值逻辑
+    - `fractional_polynomial.py` # 实现分式多项式类及其运算
+    - `formatting.py` # 实现输出格式化相关的函数
+    - `parser.py` # 实现表达式解析器
+    - `partial_fraction.py` # 实现分式裂项功能和排序逻辑
+    - `polynomial.py` # 实现多项式类及其运算
+    - `tokenizer.py` # 实现词法分析器
+- `main.py` # 项目主入口，提供交互式命令行界面
+- `test.py` # 测试文件，可查看具体输入输出格式
+- `README.md` # 项目说明文件
 
 
 ## 更新日志
