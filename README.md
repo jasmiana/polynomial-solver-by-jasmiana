@@ -1,4 +1,4 @@
-# 多项式 / 分式多项式化简工具
+# jasmiana's polynomial solver
 
 不想算？没问题。让jasmiana's polynomial solver帮助你完成繁琐的多项式计算与化简任务。
 
