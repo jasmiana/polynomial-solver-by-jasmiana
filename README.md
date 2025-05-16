@@ -39,7 +39,7 @@
 项目代码组织在 `polynomial_parser` 目录下，主要包含以下模块：
 
 
-polynomial_parser/
+polynomial_parser/                                        <br>
 ├── init.py # 包初始化文件                                <br>
 ├── ast_nodes.py # 定义 AST 节点类                        <br>
 ├── evaluator.py # 实现 AST 求值逻辑                      <br>
