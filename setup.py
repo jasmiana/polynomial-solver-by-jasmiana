@@ -7,6 +7,7 @@ setup(
     install_requires=[
         # 如果您的项目依赖于任何第三方库，请在此列出
         # 例如： 'sympy',
+        'sympy'
     ],
     entry_points={
         # 如果您希望安装后可以通过命令行运行某个函数，可以在这里配置

@@ -133,7 +133,7 @@ class Polynomial:
         return Polynomial(result_terms)
 
     def __radd__(self, other):
-         return self + other
+        return self + other
 
     def __neg__(self):
         return Polynomial({exp: -coeff for exp, coeff in self.terms.items()})
@@ -218,7 +218,7 @@ class Polynomial:
         divisor_leading_exp, divisor_leading_coeff = other._leading_term()
 
         if divisor_leading_coeff == 0:
-             raise ValueError("除数的主项系数不能为零")
+            raise ValueError("除数的主项系数不能为零")
 
         while remainder.degree() >= other.degree() and remainder.terms:
             remainder_leading_exp, remainder_leading_coeff = remainder._leading_term()
@@ -242,25 +242,27 @@ class Polynomial:
 
         return (quotient, remainder)
 
-    '''
+    
     def __truediv__(self, other):
+        from .fractional_polynomial import FractionalPolynomial
         if isinstance(other, Polynomial):
-             if not other.terms:
-                  raise ValueError("除数不能是零多项式")
-             return FractionalPolynomial(self, other)
+            if not other.terms:
+                raise ValueError("除数不能是零多项式")
+            return FractionalPolynomial(self, other)
         elif isinstance(other, (int, Fraction)):
-             if other == 0:
-                  raise ValueError("除数不能为零")
-             return FractionalPolynomial(self, Polynomial({0: other}))
+            if other == 0:
+                raise ValueError("除数不能为零")
+            return FractionalPolynomial(self, Polynomial({0: other}))
         else:
-             return NotImplemented
-
+            return NotImplemented
+    
+    '''
     def __rtruediv__(self, other):
-         if isinstance(other, (int, Fraction)):
-              num_poly = Polynomial({0: other})
-              return FractionalPolynomial(num_poly, self)
-         else:
-              return NotImplemented
+        if isinstance(other, (int, Fraction)):
+            num_poly = Polynomial({0: other})
+            return FractionalPolynomial(num_poly, self)
+        else:
+            return NotImplemented
     '''
 
     def _to_polynomial(self, value):
@@ -270,3 +272,4 @@ class Polynomial:
             return Polynomial({0: value})
         else:
             raise TypeError(f"无法将类型 {type(value)}转换为 Polynomial")
+        

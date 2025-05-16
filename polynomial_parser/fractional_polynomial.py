@@ -17,9 +17,9 @@ class FractionalPolynomial:
         # 检查分母是否为零多项式
         if denominator.is_zero():
             if not numerator.is_zero():
-                 raise ValueError("分式不能是 0/0 的形式")
+                raise ValueError("分式不能是 0/0 的形式")
             else:
-                 raise ValueError("分母不能是零多项式")
+                raise ValueError("分母不能是零多项式")
 
         self.numerator = numerator
         self.denominator = denominator
@@ -42,33 +42,33 @@ class FractionalPolynomial:
 
         # 检查 GCD 是否是常数 1
         if not (gcd.is_constant() and gcd.terms.get(0) == Fraction(1)): # 使用 is_constant 方法
-             try:
-                 new_numerator, rem_num = self.numerator.divmod_polynomial(gcd)
-                 new_denominator, rem_den = self.denominator.divmod_polynomial(gcd)
+            try:
+                new_numerator, rem_num = self.numerator.divmod_polynomial(gcd)
+                new_denominator, rem_den = self.denominator.divmod_polynomial(gcd)
 
-                 # 检查余数是否为零多项式
-                 if not rem_num.is_zero() or not rem_den.is_zero(): # 使用 is_zero 方法
-                     print("警告: 约分后余数不为零，可能存在问题。")
+                # 检查余数是否为零多项式
+                if not rem_num.is_zero() or not rem_den.is_zero(): # 使用 is_zero 方法
+                    print("警告: 约分后余数不为零，可能存在问题。")
 
-                 self.numerator = new_numerator
-                 self.denominator = new_denominator
+                self.numerator = new_numerator
+                self.denominator = new_denominator
 
-             except ValueError as e:
-                 print(f"约分过程中发生错误: {e}")
+            except ValueError as e:
+                print(f"约分过程中发生错误: {e}")
 
         if self.denominator.terms:
-             den_leading_exp, den_leading_coeff = self.denominator._leading_term()
-             if den_leading_coeff < 0:
-                 self.numerator = self.numerator * -1
-                 self.denominator = self.denominator * -1
-             # 检查分母是否是常数且不为 1
-             elif self.denominator.is_constant() and den_leading_coeff != 1: # 使用 is_constant 方法
-                 constant_factor = den_leading_coeff
-                 new_num_terms = {exp: coeff / constant_factor for exp, coeff in self.numerator.terms.items()}
-                 new_den_terms = {0: Fraction(1)}
+            den_leading_exp, den_leading_coeff = self.denominator._leading_term()
+            if den_leading_coeff < 0:
+                self.numerator = self.numerator * -1
+                self.denominator = self.denominator * -1
+            # 检查分母是否是常数且不为 1
+            elif self.denominator.is_constant() and den_leading_coeff != 1: # 使用 is_constant 方法
+                constant_factor = den_leading_coeff
+                new_num_terms = {exp: coeff / constant_factor for exp, coeff in self.numerator.terms.items()}
+                new_den_terms = {0: Fraction(1)}
 
-                 self.numerator = Polynomial(new_num_terms)
-                 self.denominator = Polynomial(new_den_terms)
+                self.numerator = Polynomial(new_num_terms)
+                self.denominator = Polynomial(new_den_terms)
 
     def __str__(self):
         """
@@ -87,7 +87,7 @@ class FractionalPolynomial:
 
         # If numerator degree is less than denominator degree, return the simplified fraction form
         if self.numerator.degree() < self.denominator.degree():
-             # Enclose in parentheses to clarify the fraction structure
+            # Enclose in parentheses to clarify the fraction structure
             return f"({self.numerator}) / ({self.denominator})"
 
         # If numerator degree is >= denominator degree, perform polynomial long division
@@ -117,12 +117,19 @@ class FractionalPolynomial:
                     # 余数最高次项系数为正或零，使用加号，并在分子部分显示余数本身
                     return f"{quotient_str} + ({str(remainder)}) / ({str(self.denominator)})"
 
-
         except ValueError as e:
             # If an error occurs during division (e.g., division by zero, though checked in __init__)
             # Return the original fraction form with an optional warning
             print(f"警告: 字符串表示中多项式除法错误: {e}")
             return f"({self.numerator}) / ({self.denominator})" # Fallback to basic fraction representation
+
+    def to_single_fraction_str(self):
+        """
+        返回分式多项式的字符串表示（单一分式形式，分子/分母）。
+        """
+        # Ensure numerator and denominator are simplified in __init__
+        # Use str() on numerator and denominator to get their string representations
+        return f"({str(self.numerator)}) / ({str(self.denominator)})"
 
     # --- 算术运算 ---
     # (FractionalPolynomial 类的算术运算方法 (__add__, __sub__, __mul__, __truediv__, __radd__, __rsub__, __rmul__, __rtruediv__) 保持不变)
@@ -143,7 +150,7 @@ class FractionalPolynomial:
 
     def __sub__(self, other):
         if isinstance(other, (Polynomial, int, Fraction)):
-             other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
+            other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
         elif not isinstance(other, FractionalPolynomial):
             return NotImplemented
 
@@ -155,13 +162,13 @@ class FractionalPolynomial:
     def __rsub__(self, other):
         """反向减法: other - self"""
         if isinstance(other, (int, Fraction)):
-             other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
-             return other - self
+            other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
+            return other - self
         return NotImplemented
 
     def __mul__(self, other):
         if isinstance(other, (Polynomial, int, Fraction)):
-             other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
+            other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
         elif not isinstance(other, FractionalPolynomial):
             return NotImplemented
 
@@ -175,7 +182,7 @@ class FractionalPolynomial:
 
     def __truediv__(self, other):
         if isinstance(other, (Polynomial, int, Fraction)):
-             other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
+            other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
         elif not isinstance(other, FractionalPolynomial):
             return NotImplemented
 
@@ -190,8 +197,8 @@ class FractionalPolynomial:
     def __rtruediv__(self, other):
         """反向除法: other / self"""
         if isinstance(other, (int, Fraction)):
-             other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
-             return other / self
+            other = FractionalPolynomial(self._to_polynomial(other), Polynomial({0: 1}))
+            return other / self
         return NotImplemented
 
     def _to_polynomial(self, value):
@@ -202,6 +209,5 @@ class FractionalPolynomial:
             return Polynomial({0: value})
         else:
             raise TypeError(f"无法将类型 {type(value)} 转换为 Polynomial")
-
 
         
