@@ -1,6 +1,7 @@
 # jasmiana's Polynomial Solver
 
-不想算？没问题。让jasmiana's polynomial solver帮助你完成繁琐的多项式计算与化简任务。
+如果您不是一名数学家，我们实在不明白您为什么要把宝贵的时间浪费在通分和合并同类项上。不想算？没问题。交给这款多项式解析器吧。
+隆重介绍 jasmiana's Polynomial Solver - 帮您完成繁琐的多项式计算与化简过程，助您早日实现数学领域0的突破。现已在 GitHub 推出。
 
 ## 项目概述
 

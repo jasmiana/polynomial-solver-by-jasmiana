@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='polynomial-solver',       # 软件包名称，支持自定义
-    version='0.1.0',                # 版本号，根据需要修改
+    version='0.1.1',                # 版本号，根据需要修改
     packages=find_packages(),       # 自动查找包含 __init__.py 的目录作为包
     install_requires=[
         # 如果您的项目依赖于任何第三方库，请在此列出
